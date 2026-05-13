@@ -377,61 +377,39 @@ function AssetImage({ src, alt, className }) {
   );
 }
 
-function HelixBackdrop({ light }) {
+function SlideBackground({ light }) {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      className={cx(
+        "pointer-events-none absolute inset-0",
+        light ? "bg-white" : "bg-[#050505]"
+      )}
+    >
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-sky-200 to-yellow-400" />
       <div
         className={cx(
-          "absolute -left-20 top-[18%] h-[44%] w-[72%] rounded-full border-[34px] opacity-20 blur-[1px]",
-          light ? "border-blue-200" : "border-blue-500"
+          "absolute inset-x-0 bottom-0 h-px",
+          light ? "bg-black/10" : "bg-white/10"
         )}
       />
-      <div
-        className={cx(
-          "absolute right-[-18%] top-[28%] h-[42%] w-[70%] rounded-full border-[34px] opacity-20 blur-[1px]",
-          light ? "border-yellow-200" : "border-yellow-400"
-        )}
-      />
-      <svg
-        className="absolute left-0 top-0 h-full w-full opacity-[0.16]"
-        viewBox="0 0 1600 900"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M-80 620C220 240 520 240 800 620C1080 1000 1380 1000 1680 620"
-          stroke="url(#helixA)"
-          strokeWidth="3"
-        />
-        <path
-          d="M-80 280C220 660 520 660 800 280C1080 -100 1380 -100 1680 280"
-          stroke="url(#helixB)"
-          strokeWidth="3"
-        />
-        <defs>
-          <linearGradient id="helixA" x1="0" x2="1600" y1="0" y2="0">
-            <stop stopColor={brand.blue} />
-            <stop offset="1" stopColor={brand.gold} />
-          </linearGradient>
-          <linearGradient id="helixB" x1="0" x2="1600" y1="0" y2="0">
-            <stop stopColor={brand.gold} />
-            <stop offset="1" stopColor={brand.blue} />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
-      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-yellow-400/20 blur-3xl" />
     </div>
   );
 }
 
 function Logo({ light }) {
   return (
-    <AssetImage
-      src={light ? ASSETS.logoBlack : ASSETS.logoColor}
-      alt="BNext AI"
-      className="h-10 w-auto object-contain"
-    />
+    <div
+      className={cx(
+        "flex h-10 w-32 shrink-0 items-center justify-end overflow-hidden rounded-md px-2",
+        light ? "bg-transparent" : "bg-black/35"
+      )}
+    >
+      <AssetImage
+        src={light ? ASSETS.logoBlack : ASSETS.logoColor}
+        alt="BNext AI"
+        className="max-h-8 w-full object-contain"
+      />
+    </div>
   );
 }
 
