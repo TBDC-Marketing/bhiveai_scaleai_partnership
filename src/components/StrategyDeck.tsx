@@ -1021,6 +1021,7 @@ export default function BNextStrategyDeck() {
   const [tocOpen, setTocOpen] = useState(true);
   const [light, setLight] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [controlsOpen, setControlsOpen] = useState(true);
 
   const slide = slides[current];
   const progress = useMemo(
