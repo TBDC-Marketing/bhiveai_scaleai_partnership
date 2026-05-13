@@ -726,7 +726,7 @@ function TimelineSlide({ slide, light }) {
 
 function CapabilitiesSlide({ slide, light }) {
   return (
-    <div className="flex h-full flex-col gap-6">
+    <div className="flex h-full flex-col gap-3">
       <div className="grid grid-cols-[1fr_0.9fr] gap-8">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={ShieldCheck}>
@@ -738,18 +738,18 @@ function CapabilitiesSlide({ slide, light }) {
           <div
             key={capability.title}
             className={cx(
-              "flex flex-col rounded-lg border p-5",
+              "flex flex-col rounded-lg border p-3",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
-            <Users className="mb-4 h-8 w-8 text-blue-400" />
+            <Users className="mb-4 h-5 w-5 text-blue-400" />
             <h3 className="text-[clamp(0.92rem,1.25vw,1.18rem)] font-black leading-tight">
               {capability.title}
             </h3>
             <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-yellow-400">
               {capability.person}
             </p>
-            <div className="mt-5">
+            <div className="mt-3">
               <BulletList items={capability.items} light={light} icon={CheckCircle2} />
             </div>
           </div>
