@@ -358,12 +358,10 @@ function AssetImage({ src, alt, className }) {
     return (
       <div
         className={cx(
-          "flex h-full min-h-[180px] w-full items-center justify-center border border-dashed border-current/20 bg-current/5 text-center text-xs uppercase tracking-[0.28em] opacity-70",
+          "flex h-full min-h-0 w-full items-center justify-center border border-dashed border-current/20 bg-current/5 px-2 text-center text-[0.55rem] uppercase tracking-[0.18em] opacity-70",
           className
         )}
       >
-        Upload asset:
-        <br />
         {src.replace("/", "")}
       </div>
     );
@@ -379,61 +377,39 @@ function AssetImage({ src, alt, className }) {
   );
 }
 
-function HelixBackdrop({ light }) {
+function SlideBackground({ light }) {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      className={cx(
+        "pointer-events-none absolute inset-0",
+        light ? "bg-white" : "bg-[#050505]"
+      )}
+    >
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-sky-200 to-yellow-400" />
       <div
         className={cx(
-          "absolute -left-20 top-[18%] h-[44%] w-[72%] rounded-full border-[34px] opacity-20 blur-[1px]",
-          light ? "border-blue-200" : "border-blue-500"
+          "absolute inset-x-0 bottom-0 h-px",
+          light ? "bg-black/10" : "bg-white/10"
         )}
       />
-      <div
-        className={cx(
-          "absolute right-[-18%] top-[28%] h-[42%] w-[70%] rounded-full border-[34px] opacity-20 blur-[1px]",
-          light ? "border-yellow-200" : "border-yellow-400"
-        )}
-      />
-      <svg
-        className="absolute left-0 top-0 h-full w-full opacity-[0.16]"
-        viewBox="0 0 1600 900"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M-80 620C220 240 520 240 800 620C1080 1000 1380 1000 1680 620"
-          stroke="url(#helixA)"
-          strokeWidth="3"
-        />
-        <path
-          d="M-80 280C220 660 520 660 800 280C1080 -100 1380 -100 1680 280"
-          stroke="url(#helixB)"
-          strokeWidth="3"
-        />
-        <defs>
-          <linearGradient id="helixA" x1="0" x2="1600" y1="0" y2="0">
-            <stop stopColor={brand.blue} />
-            <stop offset="1" stopColor={brand.gold} />
-          </linearGradient>
-          <linearGradient id="helixB" x1="0" x2="1600" y1="0" y2="0">
-            <stop stopColor={brand.gold} />
-            <stop offset="1" stopColor={brand.blue} />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
-      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-yellow-400/20 blur-3xl" />
     </div>
   );
 }
 
 function Logo({ light }) {
   return (
-    <AssetImage
-      src={light ? ASSETS.logoBlack : ASSETS.logoColor}
-      alt="BNext AI"
-      className="h-10 w-auto object-contain"
-    />
+    <div
+      className={cx(
+        "flex h-10 w-32 shrink-0 items-center justify-end overflow-hidden rounded-md px-2",
+        light ? "bg-transparent" : "bg-black/35"
+      )}
+    >
+      <AssetImage
+        src={light ? ASSETS.logoBlack : ASSETS.logoColor}
+        alt="BNext AI"
+        className="max-h-8 w-full object-contain"
+      />
+    </div>
   );
 }
 
@@ -441,15 +417,15 @@ function SlideShell({ children, slide, currentIndex, light }) {
   return (
     <section
       className={cx(
-        "relative flex aspect-video w-full max-w-[1600px] overflow-hidden rounded-lg border shadow-2xl",
+        "relative flex aspect-video w-full max-w-[1500px] max-h-[calc(100dvh-8.25rem)] overflow-hidden rounded-lg border shadow-2xl",
         light
           ? "border-black/10 bg-white text-black shadow-blue-200/30"
           : "border-white/10 bg-black text-white shadow-black"
       )}
     >
-      <HelixBackdrop light={light} />
-      <div className="relative z-10 flex h-full w-full flex-col p-[3.2%]">
-        <header className="mb-5 flex items-start justify-between gap-6">
+      <SlideBackground light={light} />
+      <div className="relative z-10 flex h-full w-full flex-col p-[2.35%]">
+        <header className="mb-3 flex items-start justify-between gap-4">
           <div>
             <div
               className={cx(
@@ -467,7 +443,7 @@ function SlideShell({ children, slide, currentIndex, light }) {
           <Logo light={light} />
         </header>
         <main className="min-h-0 flex-1">{children}</main>
-        <footer className="mt-4 flex items-center justify-between gap-6">
+        <footer className="mt-2 flex items-center justify-between gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-blue-500/80 via-white/20 to-yellow-400/80" />
           <div className="font-mono text-[clamp(0.55rem,0.8vw,0.8rem)] uppercase tracking-[0.26em] opacity-60">
             {String(currentIndex + 1).padStart(2, "0")} / {slides.length}
@@ -482,14 +458,14 @@ function KeyMessage({ children, light, icon: Icon = Zap }) {
   return (
     <div
       className={cx(
-        "flex items-center gap-5 rounded-lg border p-5",
+        "flex items-center gap-3 rounded-lg border p-3",
         light
           ? "border-blue-200 bg-gradient-to-r from-blue-50 via-white to-yellow-50"
           : "border-blue-400/40 bg-white/[0.04]"
       )}
     >
       <Icon className="h-9 w-9 shrink-0 text-blue-400" />
-      <p className="text-[clamp(1rem,1.8vw,1.75rem)] font-bold leading-tight">
+      <p className="text-[clamp(0.82rem,1.28vw,1.18rem)] font-bold leading-tight">
         {children}
       </p>
     </div>
@@ -498,12 +474,12 @@ function KeyMessage({ children, light, icon: Icon = Zap }) {
 
 function BulletList({ items, light, icon: Icon = CheckCircle2 }) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {items.map((item) => (
         <div
           key={item}
           className={cx(
-            "flex gap-4 border-b pb-3 text-[clamp(0.8rem,1.25vw,1.12rem)] leading-snug",
+            "flex gap-2.5 border-b pb-2 text-[clamp(0.68rem,0.98vw,0.96rem)] leading-snug",
             light ? "border-black/10" : "border-white/10"
           )}
         >
@@ -540,7 +516,7 @@ function SlideTitle({ slide }) {
 
   return (
     <div>
-      <h1 className="max-w-[920px] text-[clamp(2.4rem,6vw,5.8rem)] font-black uppercase leading-[0.92] tracking-normal">
+      <h1 className="max-w-[920px] text-[clamp(1.75rem,4.1vw,4.55rem)] font-black uppercase leading-[0.92] tracking-normal">
         {slide.title.includes("AI") ? (
           <>
             {titleParts.map((part, index) => (
@@ -554,7 +530,7 @@ function SlideTitle({ slide }) {
           slide.title
         )}
       </h1>
-      <p className="mt-4 max-w-[760px] text-[clamp(0.95rem,1.6vw,1.35rem)] font-medium leading-snug opacity-80">
+      <p className="mt-2 max-w-[760px] text-[clamp(0.78rem,1.15vw,1.05rem)] font-medium leading-snug opacity-80">
         {slide.subtitle}
       </p>
     </div>
@@ -563,20 +539,20 @@ function SlideTitle({ slide }) {
 
 function SplitHeroSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1fr_0.86fr] gap-8">
+    <div className="grid h-full grid-cols-[1fr_0.86fr] gap-5">
       <div className="flex flex-col justify-between">
         <div>
           <SlideTitle slide={slide} />
           <p
             className={cx(
-              "mt-6 max-w-[720px] border-l-2 pl-4 text-[clamp(0.85rem,1.3vw,1.1rem)] leading-relaxed",
+              "mt-3 max-w-[720px] border-l-2 pl-4 text-[clamp(0.85rem,1.3vw,1.1rem)] leading-relaxed",
               light ? "border-blue-500" : "border-blue-400"
             )}
           >
             {slide.purpose}
           </p>
         </div>
-        <div className="space-y-5">
+        <div className="space-y-3">
           <BulletList items={slide.bullets} light={light} />
           <Tags tags={slide.tags} light={light} />
         </div>
@@ -599,7 +575,7 @@ function SplitHeroSlide({ slide, light }) {
 
 function ProblemSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1.15fr_0.85fr] gap-10">
+    <div className="grid h-full grid-cols-[1.15fr_0.85fr] gap-5">
       <div className="flex flex-col justify-between">
         <div>
           <SlideTitle slide={slide} />
@@ -610,16 +586,16 @@ function ProblemSlide({ slide, light }) {
       </div>
       <div
         className={cx(
-          "flex flex-col justify-between rounded-lg border p-8",
+          "flex flex-col justify-between rounded-lg border p-5",
           light
             ? "border-black/10 bg-white/80 shadow-xl shadow-blue-100"
             : "border-blue-400/40 bg-white/[0.05] shadow-2xl shadow-blue-500/10"
         )}
       >
-        <div className="text-8xl font-black leading-none">
+        <div className="text-5xl font-black leading-none">
           <GradientText>&quot;</GradientText>
         </div>
-        <p className="text-[clamp(1.5rem,3.1vw,3.2rem)] font-black uppercase leading-tight">
+        <p className="text-[clamp(1.1rem,2.3vw,2.25rem)] font-black uppercase leading-tight">
           Canada's challenge is no longer <GradientText>AI awareness</GradientText>
         </p>
         <div className="h-px w-full bg-gradient-to-r from-blue-500 to-yellow-400" />
@@ -634,12 +610,12 @@ function ProblemSlide({ slide, light }) {
 function FlywheelSlide({ slide, light }) {
   const Icon = slide.icon;
   return (
-    <div className="grid h-full grid-cols-[0.95fr_1.05fr] gap-9">
+    <div className="grid h-full grid-cols-[0.82fr_1.18fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <div
           className={cx(
-            "rounded-lg border p-5",
+            "rounded-lg border p-3",
             light ? "border-black/10 bg-white/80" : "border-white/10 bg-white/[0.05]"
           )}
         >
@@ -647,12 +623,12 @@ function FlywheelSlide({ slide, light }) {
             <Icon className="h-5 w-5" />
             Platform Anchor
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2">
             {slide.workflow.map((step, index) => (
               <div
                 key={step}
                 className={cx(
-                  "rounded-md border p-3 text-sm font-semibold",
+                  "rounded-md border p-2 text-sm font-semibold",
                   light ? "border-black/10 bg-blue-50/60" : "border-white/10 bg-black/30"
                 )}
               >
@@ -667,11 +643,11 @@ function FlywheelSlide({ slide, light }) {
         </KeyMessage>
       </div>
       <div className="relative grid place-items-center">
-        <div className="absolute h-[72%] w-[72%] rounded-full border border-dashed border-current/20" />
-        <div className="absolute h-[46%] w-[46%] rounded-full border border-current/20" />
+        <div className="absolute h-[62%] w-[62%] rounded-full border border-dashed border-current/20" />
+        <div className="absolute h-[36%] w-[36%] rounded-full border border-current/20" />
         <div
           className={cx(
-            "z-10 grid h-36 w-36 place-items-center rounded-full border text-center text-lg font-black uppercase",
+            "z-10 grid h-24 w-24 place-items-center rounded-full border text-center text-lg font-black uppercase",
             light
               ? "border-blue-200 bg-white shadow-xl"
               : "border-blue-400/40 bg-black shadow-2xl shadow-blue-500/20"
@@ -681,18 +657,21 @@ function FlywheelSlide({ slide, light }) {
         </div>
         {slide.bullets.map((item, index) => {
           const angle = (index / slide.bullets.length) * Math.PI * 2 - Math.PI / 2;
-          const x = Math.cos(angle) * 38;
-          const y = Math.sin(angle) * 38;
+          const x = Math.cos(angle) * 31;
+          const y = Math.sin(angle) * 31;
           return (
             <div
               key={item}
               className={cx(
-                "absolute flex h-20 w-40 items-center justify-center rounded-md border px-3 text-center text-[clamp(0.62rem,0.85vw,0.82rem)] font-bold leading-tight",
+                "absolute flex h-14 w-36 items-center justify-center rounded-md border px-3 text-center text-[clamp(0.52rem,0.68vw,0.68rem)] font-bold leading-tight",
                 light
                   ? "border-black/10 bg-white/90 shadow-lg"
                   : "border-white/10 bg-white/[0.06] backdrop-blur"
               )}
-              style={{ left: `calc(50% + ${x}% - 5rem)`, top: `calc(50% + ${y}% - 2.5rem)` }}
+              style={{
+                left: `calc(50% + ${x}% - 4.5rem)`,
+                top: `calc(50% + ${y}% - 1.75rem)`,
+              }}
             >
               {item}
             </div>
@@ -712,17 +691,17 @@ function TimelineSlide({ slide, light }) {
           <BulletList items={slide.bullets} light={light} icon={CircleDot} />
         </div>
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-3 gap-5">
+      <div className="grid min-h-0 flex-1 grid-cols-3 gap-3">
         {slide.phases.map((phase, index) => (
           <div
             key={phase.title}
             className={cx(
-              "flex flex-col rounded-lg border p-5",
+              "flex flex-col rounded-lg border p-3",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
             <div className="mb-4 flex items-center gap-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-gradient-to-r from-blue-500 to-yellow-400 text-lg font-black text-black">
+              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-gradient-to-r from-blue-500 to-yellow-400 text-lg font-black text-black">
                 {index + 1}
               </div>
               <div>
@@ -747,7 +726,7 @@ function TimelineSlide({ slide, light }) {
 
 function CapabilitiesSlide({ slide, light }) {
   return (
-    <div className="flex h-full flex-col gap-6">
+    <div className="flex h-full flex-col gap-3">
       <div className="grid grid-cols-[1fr_0.9fr] gap-8">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={ShieldCheck}>
@@ -759,18 +738,18 @@ function CapabilitiesSlide({ slide, light }) {
           <div
             key={capability.title}
             className={cx(
-              "flex flex-col rounded-lg border p-5",
+              "flex flex-col rounded-lg border p-3",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
-            <Users className="mb-4 h-8 w-8 text-blue-400" />
+            <Users className="mb-4 h-5 w-5 text-blue-400" />
             <h3 className="text-[clamp(0.92rem,1.25vw,1.18rem)] font-black leading-tight">
               {capability.title}
             </h3>
             <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-yellow-400">
               {capability.person}
             </p>
-            <div className="mt-5">
+            <div className="mt-3">
               <BulletList items={capability.items} light={light} icon={CheckCircle2} />
             </div>
           </div>
@@ -782,7 +761,7 @@ function CapabilitiesSlide({ slide, light }) {
 
 function SectorsSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-10">
+    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <BulletList items={slide.bullets} light={light} icon={Focus} />
@@ -795,11 +774,11 @@ function SectorsSlide({ slide, light }) {
           <div
             key={label}
             className={cx(
-              "flex items-center gap-5 rounded-lg border p-6",
+              "flex items-center gap-5 rounded-lg border p-4",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
-            <div className="grid h-16 w-16 place-items-center rounded-md bg-gradient-to-br from-blue-500 to-yellow-400">
+            <div className="grid h-11 w-11 place-items-center rounded-md bg-gradient-to-br from-blue-500 to-yellow-400">
               <Icon className="h-8 w-8 text-black" />
             </div>
             <div>
@@ -822,7 +801,7 @@ function SectorsSlide({ slide, light }) {
 
 function AlignmentSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1fr_1fr] gap-8">
+    <div className="grid h-full grid-cols-[1fr_1fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <div>
@@ -849,7 +828,7 @@ function AlignmentSlide({ slide, light }) {
       </div>
       <div
         className={cx(
-          "flex flex-col justify-between rounded-lg border p-7",
+          "flex flex-col justify-between rounded-lg border p-4",
           light ? "border-black/10 bg-white/85" : "border-blue-400/40 bg-white/[0.05]"
         )}
       >
@@ -859,7 +838,7 @@ function AlignmentSlide({ slide, light }) {
             Collaboration Areas
           </h3>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-2">
           {slide.collaboration.map((item, index) => (
             <div key={item} className="flex items-center gap-4">
               <span className="font-mono text-lg text-blue-400">
@@ -879,7 +858,7 @@ function AlignmentSlide({ slide, light }) {
 
 function MomentumSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1fr_0.9fr] gap-9">
+    <div className="grid h-full grid-cols-[1fr_0.9fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={Rocket}>
@@ -889,11 +868,11 @@ function MomentumSlide({ slide, light }) {
       <div className="flex flex-col justify-center">
         <div
           className={cx(
-            "rounded-lg border p-8",
+            "rounded-lg border p-5",
             light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
           )}
         >
-          <div className="mb-7 text-[clamp(3rem,7vw,7rem)] font-black leading-none">
+          <div className="mb-7 text-[clamp(2.6rem,5vw,5rem)] font-black leading-none">
             <GradientText>100</GradientText>
           </div>
           <p className="mb-8 text-[clamp(1.1rem,2vw,2rem)] font-black uppercase leading-tight">
@@ -908,17 +887,17 @@ function MomentumSlide({ slide, light }) {
 
 function ReportingSlide({ slide, light }) {
   return (
-    <div className="flex h-full flex-col gap-5">
+    <div className="flex h-full flex-col gap-3">
       <div className="grid grid-cols-[1fr_0.9fr] gap-8">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={BarChart3}>
           {slide.keyMessage}
         </KeyMessage>
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-[1.25fr_0.75fr] gap-6">
+      <div className="grid min-h-0 flex-1 grid-cols-[1.25fr_0.75fr] gap-3">
         <div
           className={cx(
-            "rounded-lg border p-6",
+            "rounded-lg border p-4",
             light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
           )}
         >
@@ -928,10 +907,10 @@ function ReportingSlide({ slide, light }) {
           <div className="grid grid-cols-5 gap-3">
             {slide.workflow.map((step, index) => (
               <div key={step} className="flex flex-col items-center text-center">
-                <div className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-blue-500 to-yellow-400 text-lg font-black text-black">
+                <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-blue-500 to-yellow-400 text-lg font-black text-black">
                   {index + 1}
                 </div>
-                <div className="mt-4 text-[clamp(0.72rem,1vw,0.95rem)] font-bold leading-tight">
+                <div className="mt-2 text-[clamp(0.72rem,1vw,0.95rem)] font-bold leading-tight">
                   {step}
                 </div>
               </div>
@@ -940,7 +919,7 @@ function ReportingSlide({ slide, light }) {
         </div>
         <div
           className={cx(
-            "rounded-lg border p-6",
+            "rounded-lg border p-4",
             light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
           )}
         >
@@ -966,7 +945,7 @@ function ReportingSlide({ slide, light }) {
 
 function NextStepsSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-10">
+    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={Sparkles}>
@@ -978,7 +957,7 @@ function NextStepsSlide({ slide, light }) {
           <div
             key={item}
             className={cx(
-              "flex items-center gap-5 rounded-lg border p-5",
+              "flex items-center gap-5 rounded-lg border p-3",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
@@ -1025,7 +1004,7 @@ function IconButton({ children, label, onClick, disabled, active }) {
       onClick={onClick}
       disabled={disabled}
       className={cx(
-        "grid h-11 w-11 place-items-center rounded-md border transition",
+        "grid h-9 w-9 place-items-center rounded-md border transition",
         active
           ? "border-yellow-300 bg-yellow-300 text-black"
           : "border-white/10 bg-white/[0.08] text-white hover:border-blue-300 hover:bg-blue-500/20",
@@ -1042,6 +1021,7 @@ export default function BNextStrategyDeck() {
   const [tocOpen, setTocOpen] = useState(true);
   const [light, setLight] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [controlsOpen, setControlsOpen] = useState(true);
 
   const slide = slides[current];
   const progress = useMemo(
@@ -1086,13 +1066,13 @@ export default function BNextStrategyDeck() {
   return (
     <div
       className={cx(
-        "min-h-screen overflow-hidden font-sans",
+        "h-dvh overflow-hidden font-sans",
         light
           ? "bg-slate-100 text-black"
           : "bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.18),transparent_32%),radial-gradient(circle_at_84%_10%,rgba(250,204,21,0.16),transparent_28%),#050505] text-white"
       )}
     >
-      <div className="flex min-h-screen">
+      <div className="flex h-full overflow-hidden">
         <aside
           className={cx(
             "fixed inset-y-0 left-0 z-30 flex shrink-0 flex-col border-r transition-all duration-300 lg:relative",
@@ -1163,7 +1143,7 @@ export default function BNextStrategyDeck() {
           </nav>
         </aside>
 
-        <main className="relative flex min-w-0 flex-1 flex-col">
+        <main className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
           <div
             className={cx(
               "flex h-16 items-center justify-between border-b px-5",
@@ -1215,30 +1195,46 @@ export default function BNextStrategyDeck() {
             />
           </div>
 
-          <div className="flex min-h-0 flex-1 items-center justify-center p-4 sm:p-6 lg:p-8">
+          <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-3 sm:p-4 lg:p-5">
             <SlideRenderer slide={slide} index={current} light={light} />
           </div>
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-5 z-40 flex justify-center">
-            <div className="pointer-events-auto flex items-center gap-2 rounded-lg border border-white/10 bg-black/80 p-2 text-white shadow-2xl backdrop-blur">
-              <IconButton label="First slide" onClick={() => goTo(0)} disabled={current === 0}>
-                <ChevronLeft className="h-4 w-4" />
-                <ChevronLeft className="-ml-3 h-4 w-4" />
-              </IconButton>
-              <IconButton label="Previous slide" onClick={() => goTo(current - 1)} disabled={current === 0}>
-                <ArrowLeft className="h-4 w-4" />
-              </IconButton>
-              <div className="min-w-[5rem] px-2 text-center font-mono text-xs uppercase tracking-[0.2em]">
-                {current + 1} / {slides.length}
+          <div className="pointer-events-none absolute inset-x-0 bottom-3 z-40 flex justify-center">
+            {controlsOpen ? (
+              <div className="pointer-events-auto flex items-center gap-1.5 rounded-lg border border-white/10 bg-black/80 p-1.5 text-white shadow-2xl backdrop-blur">
+                <IconButton label="First slide" onClick={() => goTo(0)} disabled={current === 0}>
+                  <ChevronLeft className="h-4 w-4" />
+                  <ChevronLeft className="-ml-3 h-4 w-4" />
+                </IconButton>
+                <IconButton label="Previous slide" onClick={() => goTo(current - 1)} disabled={current === 0}>
+                  <ArrowLeft className="h-4 w-4" />
+                </IconButton>
+                <div className="min-w-[4.25rem] px-1 text-center font-mono text-[0.68rem] uppercase tracking-[0.16em]">
+                  {current + 1} / {slides.length}
+                </div>
+                <IconButton label="Next slide" onClick={() => goTo(current + 1)} disabled={current === slides.length - 1}>
+                  <ArrowRight className="h-4 w-4" />
+                </IconButton>
+                <IconButton label="Last slide" onClick={() => goTo(slides.length - 1)} disabled={current === slides.length - 1}>
+                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="-ml-3 h-4 w-4" />
+                </IconButton>
+                <IconButton label="Minimize controls" onClick={() => setControlsOpen(false)}>
+                  <Minimize2 className="h-4 w-4" />
+                </IconButton>
               </div>
-              <IconButton label="Next slide" onClick={() => goTo(current + 1)} disabled={current === slides.length - 1}>
-                <ArrowRight className="h-4 w-4" />
-              </IconButton>
-              <IconButton label="Last slide" onClick={() => goTo(slides.length - 1)} disabled={current === slides.length - 1}>
-                <ChevronRight className="h-4 w-4" />
-                <ChevronRight className="-ml-3 h-4 w-4" />
-              </IconButton>
-            </div>
+            ) : (
+              <button
+                type="button"
+                aria-label="Expand slide controls"
+                title="Expand slide controls"
+                onClick={() => setControlsOpen(true)}
+                className="pointer-events-auto flex items-center gap-2 rounded-md border border-white/10 bg-black/80 px-3 py-2 font-mono text-xs font-bold uppercase tracking-[0.16em] text-white shadow-xl backdrop-blur hover:border-blue-300"
+              >
+                {current + 1} / {slides.length}
+                <Maximize2 className="h-3.5 w-3.5" />
+              </button>
+            )}
           </div>
         </main>
       </div>
