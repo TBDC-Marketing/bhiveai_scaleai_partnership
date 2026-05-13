@@ -887,17 +887,17 @@ function MomentumSlide({ slide, light }) {
 
 function ReportingSlide({ slide, light }) {
   return (
-    <div className="flex h-full flex-col gap-5">
+    <div className="flex h-full flex-col gap-3">
       <div className="grid grid-cols-[1fr_0.9fr] gap-8">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={BarChart3}>
           {slide.keyMessage}
         </KeyMessage>
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-[1.25fr_0.75fr] gap-6">
+      <div className="grid min-h-0 flex-1 grid-cols-[1.25fr_0.75fr] gap-3">
         <div
           className={cx(
-            "rounded-lg border p-6",
+            "rounded-lg border p-4",
             light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
           )}
         >
@@ -907,10 +907,10 @@ function ReportingSlide({ slide, light }) {
           <div className="grid grid-cols-5 gap-3">
             {slide.workflow.map((step, index) => (
               <div key={step} className="flex flex-col items-center text-center">
-                <div className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-blue-500 to-yellow-400 text-lg font-black text-black">
+                <div className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-blue-500 to-yellow-400 text-lg font-black text-black">
                   {index + 1}
                 </div>
-                <div className="mt-4 text-[clamp(0.72rem,1vw,0.95rem)] font-bold leading-tight">
+                <div className="mt-2 text-[clamp(0.72rem,1vw,0.95rem)] font-bold leading-tight">
                   {step}
                 </div>
               </div>
@@ -919,7 +919,7 @@ function ReportingSlide({ slide, light }) {
         </div>
         <div
           className={cx(
-            "rounded-lg border p-6",
+            "rounded-lg border p-4",
             light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
           )}
         >
