@@ -801,7 +801,7 @@ function SectorsSlide({ slide, light }) {
 
 function AlignmentSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1fr_1fr] gap-8">
+    <div className="grid h-full grid-cols-[1fr_1fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <div>
@@ -828,7 +828,7 @@ function AlignmentSlide({ slide, light }) {
       </div>
       <div
         className={cx(
-          "flex flex-col justify-between rounded-lg border p-7",
+          "flex flex-col justify-between rounded-lg border p-4",
           light ? "border-black/10 bg-white/85" : "border-blue-400/40 bg-white/[0.05]"
         )}
       >
@@ -838,7 +838,7 @@ function AlignmentSlide({ slide, light }) {
             Collaboration Areas
           </h3>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-2">
           {slide.collaboration.map((item, index) => (
             <div key={item} className="flex items-center gap-4">
               <span className="font-mono text-lg text-blue-400">
