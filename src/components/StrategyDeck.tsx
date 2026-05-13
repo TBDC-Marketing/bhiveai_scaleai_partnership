@@ -1066,13 +1066,13 @@ export default function BNextStrategyDeck() {
   return (
     <div
       className={cx(
-        "min-h-screen overflow-hidden font-sans",
+        "h-dvh overflow-hidden font-sans",
         light
           ? "bg-slate-100 text-black"
           : "bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.18),transparent_32%),radial-gradient(circle_at_84%_10%,rgba(250,204,21,0.16),transparent_28%),#050505] text-white"
       )}
     >
-      <div className="flex min-h-screen">
+      <div className="flex h-full overflow-hidden">
         <aside
           className={cx(
             "fixed inset-y-0 left-0 z-30 flex shrink-0 flex-col border-r transition-all duration-300 lg:relative",
