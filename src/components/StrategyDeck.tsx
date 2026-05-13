@@ -1004,7 +1004,7 @@ function IconButton({ children, label, onClick, disabled, active }) {
       onClick={onClick}
       disabled={disabled}
       className={cx(
-        "grid h-11 w-11 place-items-center rounded-md border transition",
+        "grid h-9 w-9 place-items-center rounded-md border transition",
         active
           ? "border-yellow-300 bg-yellow-300 text-black"
           : "border-white/10 bg-white/[0.08] text-white hover:border-blue-300 hover:bg-blue-500/20",
