@@ -858,7 +858,7 @@ function AlignmentSlide({ slide, light }) {
 
 function MomentumSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1fr_0.9fr] gap-9">
+    <div className="grid h-full grid-cols-[1fr_0.9fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={Rocket}>
@@ -868,11 +868,11 @@ function MomentumSlide({ slide, light }) {
       <div className="flex flex-col justify-center">
         <div
           className={cx(
-            "rounded-lg border p-8",
+            "rounded-lg border p-5",
             light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
           )}
         >
-          <div className="mb-7 text-[clamp(3rem,7vw,7rem)] font-black leading-none">
+          <div className="mb-7 text-[clamp(2.6rem,5vw,5rem)] font-black leading-none">
             <GradientText>100</GradientText>
           </div>
           <p className="mb-8 text-[clamp(1.1rem,2vw,2rem)] font-black uppercase leading-tight">
