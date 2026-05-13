@@ -761,7 +761,7 @@ function CapabilitiesSlide({ slide, light }) {
 
 function SectorsSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-10">
+    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <BulletList items={slide.bullets} light={light} icon={Focus} />
@@ -774,11 +774,11 @@ function SectorsSlide({ slide, light }) {
           <div
             key={label}
             className={cx(
-              "flex items-center gap-5 rounded-lg border p-6",
+              "flex items-center gap-5 rounded-lg border p-4",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
-            <div className="grid h-16 w-16 place-items-center rounded-md bg-gradient-to-br from-blue-500 to-yellow-400">
+            <div className="grid h-11 w-11 place-items-center rounded-md bg-gradient-to-br from-blue-500 to-yellow-400">
               <Icon className="h-8 w-8 text-black" />
             </div>
             <div>
