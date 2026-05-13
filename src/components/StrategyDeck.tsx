@@ -398,12 +398,7 @@ function SlideBackground({ light }) {
 
 function Logo({ light }) {
   return (
-    <div
-      className={cx(
-        "flex h-10 w-32 shrink-0 items-center justify-end overflow-hidden rounded-md px-2",
-        light ? "bg-transparent" : "bg-black/35"
-      )}
-    >
+    <div className="flex h-10 w-32 shrink-0 items-center justify-end overflow-hidden px-2">
       <AssetImage
         src={light ? ASSETS.logoBlack : ASSETS.logoColor}
         alt="BNext AI"
