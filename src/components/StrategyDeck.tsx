@@ -610,12 +610,12 @@ function ProblemSlide({ slide, light }) {
 function FlywheelSlide({ slide, light }) {
   const Icon = slide.icon;
   return (
-    <div className="grid h-full grid-cols-[0.95fr_1.05fr] gap-9">
+    <div className="grid h-full grid-cols-[0.82fr_1.18fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <div
           className={cx(
-            "rounded-lg border p-5",
+            "rounded-lg border p-3",
             light ? "border-black/10 bg-white/80" : "border-white/10 bg-white/[0.05]"
           )}
         >
@@ -623,12 +623,12 @@ function FlywheelSlide({ slide, light }) {
             <Icon className="h-5 w-5" />
             Platform Anchor
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2">
             {slide.workflow.map((step, index) => (
               <div
                 key={step}
                 className={cx(
-                  "rounded-md border p-3 text-sm font-semibold",
+                  "rounded-md border p-2 text-sm font-semibold",
                   light ? "border-black/10 bg-blue-50/60" : "border-white/10 bg-black/30"
                 )}
               >
@@ -643,11 +643,11 @@ function FlywheelSlide({ slide, light }) {
         </KeyMessage>
       </div>
       <div className="relative grid place-items-center">
-        <div className="absolute h-[72%] w-[72%] rounded-full border border-dashed border-current/20" />
-        <div className="absolute h-[46%] w-[46%] rounded-full border border-current/20" />
+        <div className="absolute h-[62%] w-[62%] rounded-full border border-dashed border-current/20" />
+        <div className="absolute h-[36%] w-[36%] rounded-full border border-current/20" />
         <div
           className={cx(
-            "z-10 grid h-36 w-36 place-items-center rounded-full border text-center text-lg font-black uppercase",
+            "z-10 grid h-24 w-24 place-items-center rounded-full border text-center text-lg font-black uppercase",
             light
               ? "border-blue-200 bg-white shadow-xl"
               : "border-blue-400/40 bg-black shadow-2xl shadow-blue-500/20"
@@ -657,18 +657,21 @@ function FlywheelSlide({ slide, light }) {
         </div>
         {slide.bullets.map((item, index) => {
           const angle = (index / slide.bullets.length) * Math.PI * 2 - Math.PI / 2;
-          const x = Math.cos(angle) * 38;
-          const y = Math.sin(angle) * 38;
+          const x = Math.cos(angle) * 31;
+          const y = Math.sin(angle) * 31;
           return (
             <div
               key={item}
               className={cx(
-                "absolute flex h-20 w-40 items-center justify-center rounded-md border px-3 text-center text-[clamp(0.62rem,0.85vw,0.82rem)] font-bold leading-tight",
+                "absolute flex h-14 w-36 items-center justify-center rounded-md border px-3 text-center text-[clamp(0.52rem,0.68vw,0.68rem)] font-bold leading-tight",
                 light
                   ? "border-black/10 bg-white/90 shadow-lg"
                   : "border-white/10 bg-white/[0.06] backdrop-blur"
               )}
-              style={{ left: `calc(50% + ${x}% - 5rem)`, top: `calc(50% + ${y}% - 2.5rem)` }}
+              style={{
+                left: `calc(50% + ${x}% - 4.5rem)`,
+                top: `calc(50% + ${y}% - 1.75rem)`,
+              }}
             >
               {item}
             </div>
