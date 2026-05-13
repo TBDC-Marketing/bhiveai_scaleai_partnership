@@ -539,20 +539,20 @@ function SlideTitle({ slide }) {
 
 function SplitHeroSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1fr_0.86fr] gap-8">
+    <div className="grid h-full grid-cols-[1fr_0.86fr] gap-5">
       <div className="flex flex-col justify-between">
         <div>
           <SlideTitle slide={slide} />
           <p
             className={cx(
-              "mt-6 max-w-[720px] border-l-2 pl-4 text-[clamp(0.85rem,1.3vw,1.1rem)] leading-relaxed",
+              "mt-3 max-w-[720px] border-l-2 pl-4 text-[clamp(0.85rem,1.3vw,1.1rem)] leading-relaxed",
               light ? "border-blue-500" : "border-blue-400"
             )}
           >
             {slide.purpose}
           </p>
         </div>
-        <div className="space-y-5">
+        <div className="space-y-3">
           <BulletList items={slide.bullets} light={light} />
           <Tags tags={slide.tags} light={light} />
         </div>
