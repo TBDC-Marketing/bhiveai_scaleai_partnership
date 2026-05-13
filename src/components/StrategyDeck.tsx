@@ -458,14 +458,14 @@ function KeyMessage({ children, light, icon: Icon = Zap }) {
   return (
     <div
       className={cx(
-        "flex items-center gap-5 rounded-lg border p-5",
+        "flex items-center gap-3 rounded-lg border p-3",
         light
           ? "border-blue-200 bg-gradient-to-r from-blue-50 via-white to-yellow-50"
           : "border-blue-400/40 bg-white/[0.04]"
       )}
     >
       <Icon className="h-9 w-9 shrink-0 text-blue-400" />
-      <p className="text-[clamp(1rem,1.8vw,1.75rem)] font-bold leading-tight">
+      <p className="text-[clamp(0.82rem,1.28vw,1.18rem)] font-bold leading-tight">
         {children}
       </p>
     </div>
