@@ -35,15 +35,17 @@ import {
   Zap,
 } from "lucide-react";
 
+const assetPath = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 const ASSETS = {
-  logoColor: "/BNextAI Logo - Color.png",
-  logoBlack: "/BNextAI Logo - Black.png",
-  hero: "/4.png",
-  slide1: "/Slide 1.png",
-  slide2: "/Slide 2.png",
-  slide3: "/Slide 3.png",
-  screen1: "/screen 1.png",
-  screen2: "/screen 2.png",
+  logoColor: assetPath("/BNextAI Logo - Color.png"),
+  logoBlack: assetPath("/BNextAI Logo - Black.png"),
+  hero: assetPath("/4.png"),
+  slide1: assetPath("/Slide 1.png"),
+  slide2: assetPath("/Slide 2.png"),
+  slide3: assetPath("/Slide 3.png"),
+  screen1: assetPath("/screen 1.png"),
+  screen2: assetPath("/screen 2.png"),
 };
 
 const brand = {
