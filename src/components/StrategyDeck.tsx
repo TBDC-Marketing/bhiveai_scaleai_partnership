@@ -417,15 +417,15 @@ function SlideShell({ children, slide, currentIndex, light }) {
   return (
     <section
       className={cx(
-        "relative flex aspect-video w-full max-w-[1600px] overflow-hidden rounded-lg border shadow-2xl",
+        "relative flex aspect-video w-full max-w-[1500px] max-h-[calc(100dvh-8.25rem)] overflow-hidden rounded-lg border shadow-2xl",
         light
           ? "border-black/10 bg-white text-black shadow-blue-200/30"
           : "border-white/10 bg-black text-white shadow-black"
       )}
     >
-      <HelixBackdrop light={light} />
-      <div className="relative z-10 flex h-full w-full flex-col p-[3.2%]">
-        <header className="mb-5 flex items-start justify-between gap-6">
+      <SlideBackground light={light} />
+      <div className="relative z-10 flex h-full w-full flex-col p-[2.35%]">
+        <header className="mb-3 flex items-start justify-between gap-4">
           <div>
             <div
               className={cx(
@@ -443,7 +443,7 @@ function SlideShell({ children, slide, currentIndex, light }) {
           <Logo light={light} />
         </header>
         <main className="min-h-0 flex-1">{children}</main>
-        <footer className="mt-4 flex items-center justify-between gap-6">
+        <footer className="mt-2 flex items-center justify-between gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-blue-500/80 via-white/20 to-yellow-400/80" />
           <div className="font-mono text-[clamp(0.55rem,0.8vw,0.8rem)] uppercase tracking-[0.26em] opacity-60">
             {String(currentIndex + 1).padStart(2, "0")} / {slides.length}
