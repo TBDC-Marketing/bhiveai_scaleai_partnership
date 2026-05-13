@@ -40,7 +40,7 @@ const assetPath = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, ""
 const ASSETS = {
   logoColor: assetPath("/bnextai-logo-color.png"),
   logoBlack: assetPath("/bnextai-logo-black.png"),
-  hero: assetPath("/4.png"),
+  hero: assetPath("/tbdc-bhive-bnextai.png"),
   slide1: assetPath("/Slide 1.png"),
   slide2: assetPath("/Slide 2.png"),
   slide3: assetPath("/Slide 3.png"),
