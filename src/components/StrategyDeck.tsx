@@ -575,7 +575,7 @@ function SplitHeroSlide({ slide, light }) {
 
 function ProblemSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[1.15fr_0.85fr] gap-10">
+    <div className="grid h-full grid-cols-[1.15fr_0.85fr] gap-5">
       <div className="flex flex-col justify-between">
         <div>
           <SlideTitle slide={slide} />
@@ -586,16 +586,16 @@ function ProblemSlide({ slide, light }) {
       </div>
       <div
         className={cx(
-          "flex flex-col justify-between rounded-lg border p-8",
+          "flex flex-col justify-between rounded-lg border p-5",
           light
             ? "border-black/10 bg-white/80 shadow-xl shadow-blue-100"
             : "border-blue-400/40 bg-white/[0.05] shadow-2xl shadow-blue-500/10"
         )}
       >
-        <div className="text-8xl font-black leading-none">
+        <div className="text-5xl font-black leading-none">
           <GradientText>&quot;</GradientText>
         </div>
-        <p className="text-[clamp(1.5rem,3.1vw,3.2rem)] font-black uppercase leading-tight">
+        <p className="text-[clamp(1.1rem,2.3vw,2.25rem)] font-black uppercase leading-tight">
           Canada's challenge is no longer <GradientText>AI awareness</GradientText>
         </p>
         <div className="h-px w-full bg-gradient-to-r from-blue-500 to-yellow-400" />
