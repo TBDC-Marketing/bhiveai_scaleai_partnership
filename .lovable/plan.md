@@ -1,35 +1,32 @@
-## Plan: BNext AI Strategy Deck
+## Apply BNext Deck UI Fix Patch
 
-### 1. Assets
-- Copy uploaded logos to `/public`:
-  - `BNextAI_Logo_-_Color.png` → `public/BNextAI Logo - Color.png`
-  - `BNextAI_Logo_-_Black.png` → `public/BNextAI Logo - Black.png`
-- The other referenced images (`4.png`, `Slide 1-3.png`, `screen 1-2.png`) were not uploaded. The component already includes a graceful "Upload asset" fallback (`AssetImage`), so these will show clear placeholders until the user uploads them. No code change needed.
+All edits target `src/components/StrategyDeck.tsx` (plus one optional CSS safety-net in `src/styles.css`). The instructions doc is precise — this is a mechanical patch, no design decisions.
 
-### 2. Deck component
-- Create `src/components/StrategyDeck.tsx` containing the full `app.jsx` content (renamed `.tsx`, minor TS-friendly tweaks: `useState<boolean>`, prop typing where required, but largely kept as JS-compatible TSX). Preserve the `slides` array and all 10 slide layouts verbatim so copy edits stay easy.
-- Keep all interactivity from the starter:
-  - Prev/next, first/last, keyboard nav (←/→, PgUp/PgDn, Home/End, F, T, M)
-  - Progress indicator, fullscreen toggle, theme toggle, collapsible TOC
-  - 16:9 scaling canvas
+### Edits
 
-### 3. Route wiring
-- Replace placeholder in `src/routes/index.tsx` to render `<StrategyDeck />` full-screen (no marketing landing wrapper).
-- Update `__root.tsx` head: title "BNext AI × Scale AI — Strategy Deck", matching meta description.
+1. **Background**: Replace `HelixBackdrop` (huge helix/arc geometry + blurs) with a flat `SlideBackground` component — solid black/white plane, thin top brand-gradient hairline, bottom hairline divider. Swap the call site in `SlideShell`.
 
-### 4. Design tokens (`src/styles.css`)
-- Add brand tokens to `:root` and `.dark` in oklch:
-  - `--brand-blue` (#3B82F6), `--brand-gold` (#FACC15), `--brand-surface` (#1F2937), `--brand-black`, `--brand-white`
-  - Gradient helper var `--gradient-brand` blue → gold
-- Default theme = dark (cinematic). Theme toggle adds/removes `dark` class on `<html>`.
-- Tailwind utility classes used in starter (`from-blue-500`, `to-yellow-400`, `bg-gray-900`, etc.) work directly since Tailwind v4 ships these by default.
+2. **Logo**: Rewrite `Logo` so it's a contained `h-10 w-32` flex box (transparent on light, `bg-black/35` on dark), image as `max-h-8 w-full object-contain`. Update `AssetImage` fallback to a compact uppercase placeholder (no more `min-h-[180px]` block blowing up the header).
 
-### 5. Dependencies
-- Install `lucide-react` (already imported by starter).
+3. **SlideShell tightening**: Section gets `max-h-[calc(100dvh-8.25rem)]` and width drops to `1500px`. Inner padding `3.2% → 2.35%`. Header margins `mb-5 gap-6 → mb-3 gap-4`. Footer `mt-4 gap-6 → mt-2 gap-4`.
 
-### 6. QA
-- Verify build, navigate slides via keyboard + buttons, toggle theme + TOC + fullscreen, check missing-asset placeholders render legibly in dark and light.
+4. **Global slide typography**: Shrink `SlideTitle` (`6vw → 4.1vw`), subtitle (`1.6vw → 1.15vw`, `mt-4 → mt-2`). `BulletList` `space-y-3 → space-y-2`, smaller text + tighter padding. `KeyMessage` `gap-5 p-5 → gap-3 p-3`, smaller text clamp.
 
-### Out of scope
-- Generating replacement imagery for missing slide assets — user will upload those.
-- Major restyling beyond what's in the starter.
+5. **Per-slide compaction** (gaps, padding, icon sizes per spec):
+   - SplitHero, Problem, Timeline, Capabilities, Sectors, Alignment, Momentum, Reporting, NextSteps — each gets the exact gap/padding/icon-size reductions listed in §5 of the doc.
+
+6. **FlywheelSlide rework**: New grid ratio `0.82fr_1.18fr`, smaller anchor card / workflow padding, smaller center circle (`h-24 w-24`), tighter orbit rings (`62% / 36%`), smaller labels (`h-14 w-36`, smaller text), orbit radius multiplier `38 → 31`, label offsets `-4.5rem / -1.75rem`.
+
+7. **Collapsible bottom controls**: Add `controlsOpen` state. When open: compact toolbar (`gap-1.5 p-1.5`, smaller counter, plus a Minimize2 button). When collapsed: small pill with `current/total` and Maximize2 icon to re-expand. Shrink `IconButton` from `h-11 w-11` to `h-9 w-9`.
+
+8. **Page-level scroll fix**: Root wrapper `min-h-screen → h-dvh`. Inner flex `min-h-screen → h-full overflow-hidden`. `<main>` gets `min-h-0 overflow-hidden`. Slide holder padding `p-4 sm:p-6 lg:p-8 → p-3 sm:p-4 lg:p-5` plus `overflow-hidden`.
+
+9. **Optional CSS safety net**: Add `html, body, #root { height:100%; overflow:hidden; }` inside `@layer base` in `src/styles.css` to guarantee no document-level scroll.
+
+### Verification
+After build completes:
+- Confirm no page-level vertical scroll at 1920×1080.
+- Slide 3 flywheel labels stay inside the slide.
+- Bottom controls toggle between expanded toolbar and collapsed pill.
+- Top-right logo is contained; background is flat with only a thin gradient hairline.
+- Keyboard nav still works.

@@ -358,12 +358,10 @@ function AssetImage({ src, alt, className }) {
     return (
       <div
         className={cx(
-          "flex h-full min-h-[180px] w-full items-center justify-center border border-dashed border-current/20 bg-current/5 text-center text-xs uppercase tracking-[0.28em] opacity-70",
+          "flex h-full min-h-0 w-full items-center justify-center border border-dashed border-current/20 bg-current/5 px-2 text-center text-[0.55rem] uppercase tracking-[0.18em] opacity-70",
           className
         )}
       >
-        Upload asset:
-        <br />
         {src.replace("/", "")}
       </div>
     );
