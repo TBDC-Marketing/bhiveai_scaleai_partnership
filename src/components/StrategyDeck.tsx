@@ -1197,10 +1197,6 @@ export default function BNextStrategyDeck() {
           <div className="pointer-events-none absolute inset-x-0 bottom-3 z-40 flex justify-center">
             {controlsOpen ? (
               <div className="pointer-events-auto flex items-center gap-1.5 rounded-lg border border-white/10 bg-black/80 p-1.5 text-white shadow-2xl backdrop-blur">
-                <IconButton label="First slide" onClick={() => goTo(0)} disabled={current === 0}>
-                  <ChevronLeft className="h-4 w-4" />
-                  <ChevronLeft className="-ml-3 h-4 w-4" />
-                </IconButton>
                 <IconButton label="Previous slide" onClick={() => goTo(current - 1)} disabled={current === 0}>
                   <ArrowLeft className="h-4 w-4" />
                 </IconButton>
