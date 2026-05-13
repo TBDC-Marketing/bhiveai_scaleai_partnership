@@ -474,12 +474,12 @@ function KeyMessage({ children, light, icon: Icon = Zap }) {
 
 function BulletList({ items, light, icon: Icon = CheckCircle2 }) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {items.map((item) => (
         <div
           key={item}
           className={cx(
-            "flex gap-4 border-b pb-3 text-[clamp(0.8rem,1.25vw,1.12rem)] leading-snug",
+            "flex gap-2.5 border-b pb-2 text-[clamp(0.68rem,0.98vw,0.96rem)] leading-snug",
             light ? "border-black/10" : "border-white/10"
           )}
         >
