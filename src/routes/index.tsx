@@ -1,26 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import StrategyDeck from "@/components/StrategyDeck";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: StrategyDeck,
+  head: () => ({
+    meta: [
+      { title: "BNext AI × Scale AI — Strategy Deck" },
+      {
+        name: "description",
+        content:
+          "BNext AI and BHive strategic alignment deck for Scale AI: operational AI adoption, implementation, and measurable SME impact.",
+      },
+    ],
+  }),
 });
-
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
-}
