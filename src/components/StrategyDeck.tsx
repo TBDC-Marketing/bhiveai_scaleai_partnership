@@ -516,7 +516,7 @@ function SlideTitle({ slide }) {
 
   return (
     <div>
-      <h1 className="max-w-[920px] text-[clamp(2.4rem,6vw,5.8rem)] font-black uppercase leading-[0.92] tracking-normal">
+      <h1 className="max-w-[920px] text-[clamp(1.75rem,4.1vw,4.55rem)] font-black uppercase leading-[0.92] tracking-normal">
         {slide.title.includes("AI") ? (
           <>
             {titleParts.map((part, index) => (
@@ -530,7 +530,7 @@ function SlideTitle({ slide }) {
           slide.title
         )}
       </h1>
-      <p className="mt-4 max-w-[760px] text-[clamp(0.95rem,1.6vw,1.35rem)] font-medium leading-snug opacity-80">
+      <p className="mt-2 max-w-[760px] text-[clamp(0.78rem,1.15vw,1.05rem)] font-medium leading-snug opacity-80">
         {slide.subtitle}
       </p>
     </div>
