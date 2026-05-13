@@ -691,17 +691,17 @@ function TimelineSlide({ slide, light }) {
           <BulletList items={slide.bullets} light={light} icon={CircleDot} />
         </div>
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-3 gap-5">
+      <div className="grid min-h-0 flex-1 grid-cols-3 gap-3">
         {slide.phases.map((phase, index) => (
           <div
             key={phase.title}
             className={cx(
-              "flex flex-col rounded-lg border p-5",
+              "flex flex-col rounded-lg border p-3",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
             <div className="mb-4 flex items-center gap-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-gradient-to-r from-blue-500 to-yellow-400 text-lg font-black text-black">
+              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-gradient-to-r from-blue-500 to-yellow-400 text-lg font-black text-black">
                 {index + 1}
               </div>
               <div>
