@@ -1206,10 +1206,6 @@ export default function BNextStrategyDeck() {
                 <IconButton label="Next slide" onClick={() => goTo(current + 1)} disabled={current === slides.length - 1}>
                   <ArrowRight className="h-4 w-4" />
                 </IconButton>
-                <IconButton label="Last slide" onClick={() => goTo(slides.length - 1)} disabled={current === slides.length - 1}>
-                  <ChevronRight className="h-4 w-4" />
-                  <ChevronRight className="-ml-3 h-4 w-4" />
-                </IconButton>
                 <IconButton label="Minimize controls" onClick={() => setControlsOpen(false)}>
                   <Minimize2 className="h-4 w-4" />
                 </IconButton>
