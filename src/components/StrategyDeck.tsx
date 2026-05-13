@@ -1195,30 +1195,46 @@ export default function BNextStrategyDeck() {
             />
           </div>
 
-          <div className="flex min-h-0 flex-1 items-center justify-center p-4 sm:p-6 lg:p-8">
+          <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-3 sm:p-4 lg:p-5">
             <SlideRenderer slide={slide} index={current} light={light} />
           </div>
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-5 z-40 flex justify-center">
-            <div className="pointer-events-auto flex items-center gap-2 rounded-lg border border-white/10 bg-black/80 p-2 text-white shadow-2xl backdrop-blur">
-              <IconButton label="First slide" onClick={() => goTo(0)} disabled={current === 0}>
-                <ChevronLeft className="h-4 w-4" />
-                <ChevronLeft className="-ml-3 h-4 w-4" />
-              </IconButton>
-              <IconButton label="Previous slide" onClick={() => goTo(current - 1)} disabled={current === 0}>
-                <ArrowLeft className="h-4 w-4" />
-              </IconButton>
-              <div className="min-w-[5rem] px-2 text-center font-mono text-xs uppercase tracking-[0.2em]">
-                {current + 1} / {slides.length}
+          <div className="pointer-events-none absolute inset-x-0 bottom-3 z-40 flex justify-center">
+            {controlsOpen ? (
+              <div className="pointer-events-auto flex items-center gap-1.5 rounded-lg border border-white/10 bg-black/80 p-1.5 text-white shadow-2xl backdrop-blur">
+                <IconButton label="First slide" onClick={() => goTo(0)} disabled={current === 0}>
+                  <ChevronLeft className="h-4 w-4" />
+                  <ChevronLeft className="-ml-3 h-4 w-4" />
+                </IconButton>
+                <IconButton label="Previous slide" onClick={() => goTo(current - 1)} disabled={current === 0}>
+                  <ArrowLeft className="h-4 w-4" />
+                </IconButton>
+                <div className="min-w-[4.25rem] px-1 text-center font-mono text-[0.68rem] uppercase tracking-[0.16em]">
+                  {current + 1} / {slides.length}
+                </div>
+                <IconButton label="Next slide" onClick={() => goTo(current + 1)} disabled={current === slides.length - 1}>
+                  <ArrowRight className="h-4 w-4" />
+                </IconButton>
+                <IconButton label="Last slide" onClick={() => goTo(slides.length - 1)} disabled={current === slides.length - 1}>
+                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="-ml-3 h-4 w-4" />
+                </IconButton>
+                <IconButton label="Minimize controls" onClick={() => setControlsOpen(false)}>
+                  <Minimize2 className="h-4 w-4" />
+                </IconButton>
               </div>
-              <IconButton label="Next slide" onClick={() => goTo(current + 1)} disabled={current === slides.length - 1}>
-                <ArrowRight className="h-4 w-4" />
-              </IconButton>
-              <IconButton label="Last slide" onClick={() => goTo(slides.length - 1)} disabled={current === slides.length - 1}>
-                <ChevronRight className="h-4 w-4" />
-                <ChevronRight className="-ml-3 h-4 w-4" />
-              </IconButton>
-            </div>
+            ) : (
+              <button
+                type="button"
+                aria-label="Expand slide controls"
+                title="Expand slide controls"
+                onClick={() => setControlsOpen(true)}
+                className="pointer-events-auto flex items-center gap-2 rounded-md border border-white/10 bg-black/80 px-3 py-2 font-mono text-xs font-bold uppercase tracking-[0.16em] text-white shadow-xl backdrop-blur hover:border-blue-300"
+              >
+                {current + 1} / {slides.length}
+                <Maximize2 className="h-3.5 w-3.5" />
+              </button>
+            )}
           </div>
         </main>
       </div>
