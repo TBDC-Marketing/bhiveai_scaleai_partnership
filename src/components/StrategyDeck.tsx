@@ -945,7 +945,7 @@ function ReportingSlide({ slide, light }) {
 
 function NextStepsSlide({ slide, light }) {
   return (
-    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-10">
+    <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-5">
       <div className="flex flex-col justify-between">
         <SlideTitle slide={slide} />
         <KeyMessage light={light} icon={Sparkles}>
@@ -957,7 +957,7 @@ function NextStepsSlide({ slide, light }) {
           <div
             key={item}
             className={cx(
-              "flex items-center gap-5 rounded-lg border p-5",
+              "flex items-center gap-5 rounded-lg border p-3",
               light ? "border-black/10 bg-white/85" : "border-white/10 bg-white/[0.05]"
             )}
           >
